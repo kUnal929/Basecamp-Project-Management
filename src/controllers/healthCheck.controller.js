@@ -12,9 +12,11 @@ const healthCheck = (req, res) => {
     res.status(500).json(ApiResponse.error("Internal Server Error"));
   }
 };
-*/ 
+*/
 
 const healthCheck = asyncHandler(async (req, res) => {
-  res.status(200).json(new ApiResponse(200, { message: "service is up and running" }));
-})
+   res.status(200).json(
+      new ApiResponse(200, { message: "service is up and running" })
+   );
+});
 export { healthCheck };
