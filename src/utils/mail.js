@@ -1,4 +1,42 @@
 import Mailgen from "mailgen";
+import nodemailer from "nodemailer";
+
+const sendEmail = async (Option) => {
+   const mailGenerator = new Mailgen({
+      theme: "default",
+      product: {
+         name: "Task Manager",
+         link: "https://taskmangelink.com/",
+      },
+   });
+   const emailTextual = mailGenerator.generatePlaintext(Option.mailgenContent);
+
+   const emailHTML = mailGenerator.generate(Option.mailgenContent);
+
+const transporter = nodemailer.createTransport({
+    host: process.env.MAILTRAP_SMPT_HOST,
+    port: process.env.MAILTRAP_SMPT_PORT,
+    auth:{
+        user: process.env.MAILTRAP_SMPT_USER,
+        pass: process.env.MAILTRAP_SMPT_PASS,
+    }
+})
+
+const mail = {
+    from : "kunal@basecamp.com",
+    to : Option.email,
+    subject : Option.subject,
+    text: emailTextual,
+    html: emailHTML,
+}
+
+try {
+    await transporter.sendMail(mail);
+} catch (error) {
+    console.error("Error sending email. make sure you have provided mailTrap credentials in .env file", error);
+}
+};
+
 
 const emailVerificationMailgenContent = (username, verificationUrl) => {
    return {
@@ -37,4 +75,4 @@ const forgotPasswordMailgenContent = (username, passwordResetUrl) => {
    };
 };
 
-export { emailVerificationMailgenContent, forgotPasswordMailgenContent };
+export { emailVerificationMailgenContent, forgotPasswordMailgenContent, sendEmail };
