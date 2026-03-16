@@ -43,7 +43,7 @@ const userSchema = new Schema(
          type: Boolean,
          default: false,
       },
-      refreshTokens: {
+      refreshToken: {
          type: String,
       },
       forgotPasswordToken: {
@@ -100,7 +100,7 @@ userSchema.methods.generateRefreshToken = function () {
    );
 };
 
-userSchema.methods.generateTemperaryToken = function () {
+userSchema.methods.generateTemporaryToken = function () {
    const unHashedToken = crypto.randomBytes(20).toString("hex");
    const hashedToken = crypto
       .createHash("sha256")
