@@ -50,11 +50,9 @@ const register = asyncHandler(async (req, res) => {
       ),
    });
 
-   const createdUser = await user
-      .findById(user._id)
-      .select(
-         "-password -refreshToken -emailVerificationToken -emailVerificationExpiry "
-      );
+   const createdUser = await User.findById(user._id).select(
+      "-password -refreshToken -emailVerificationToken -emailVerificationExpiry "
+   );
 
    if (!createdUser) {
       throw new apiError("Something went wrong while registering user", 404);
@@ -70,6 +68,5 @@ const register = asyncHandler(async (req, res) => {
       )
    );
 });
-
 
 export { register };

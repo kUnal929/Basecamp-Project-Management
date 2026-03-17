@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 const app = express();
 import healthCheckRouter from "./routes/healthCheck.routes.js";
+import authRouter from "./routes/auth.routes.js";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,6 +19,7 @@ app.use(
 
 // routes
 app.use("/api/v1/healthcheck", healthCheckRouter);
+app.use("/api/v1/auth", authRouter);
 
 app.get("/", (req, res) => {
    res.send("Hello, World!");

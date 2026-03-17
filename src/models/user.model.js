@@ -12,7 +12,7 @@ const userSchema = new Schema(
          },
          default: {
             url: "https://placehold.co/200x200",
-            localPath: String,
+            localPath: "",
          },
       },
       username: {
@@ -32,7 +32,7 @@ const userSchema = new Schema(
       },
       fullName: {
          type: String,
-         required: true,
+         required: false,
          trim: true,
       },
       password: {
@@ -62,10 +62,9 @@ const userSchema = new Schema(
    { timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
-   if (!this.isModified("password")) return next();
+userSchema.pre("save", async function () {
+   if (!this.isModified("password")) return;
    this.password = await bcrypt.hash(this.password, 10);
-   next();
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
@@ -110,7 +109,6 @@ userSchema.methods.generateTemporaryToken = function () {
    const tokenExpiry = Date.now() + 20 * 60 * 1000; // 10 minutes
 
    return { unHashedToken, hashedToken, tokenExpiry };
-
 };
 
 export const User = mongoose.model("User", userSchema);
