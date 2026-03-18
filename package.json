@@ -8,16 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kUnal929/Basecamp-Project-Management-.git"
+    "url": "git+https://github.com/kUnal929/Basecamp-Project-Management.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/kUnal929/Basecamp-Project-Management-/issues"
+    "url": "https://github.com/kUnal929/Basecamp-Project-Management/issues"
   },
-  "homepage": "https://github.com/kUnal929/Basecamp-Project-Management-#readme",
+  "homepage": "https://github.com/kUnal929/Basecamp-Project-Management#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
