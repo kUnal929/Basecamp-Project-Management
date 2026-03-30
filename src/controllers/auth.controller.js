@@ -74,11 +74,11 @@ const login = asyncHandler(async (req, res) => {
    if (!email && !username) {
       throw new apiError(400, "Please provide email or username");
    }
-   await user.findOne({ email });
+   const user = await User.findOne({ email });
    if (!user) {
       throw new apiError(400, "User does not exist");
    }
-   const isPasswordCorrect = await user.comparePassword(password);
+   const isPasswordCorrect = await user.isPasswordCorrect(password);
 
    if (!isPasswordCorrect) {
       throw new apiError(400, "Invalid credentials");
