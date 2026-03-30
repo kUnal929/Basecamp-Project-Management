@@ -1,6 +1,5 @@
 import { validationResult } from "express-validator";
-import { apiError } from "../utils/api-error";
-import { errorMonitor } from "nodemailer/lib/xoauth2";
+import { apiError } from "../utils/api-error.js";
 
 export const validate = (req, res, next) => {
    const error = validationResult(req);
